@@ -19,7 +19,7 @@
 
     <!-- Back to home -->
     <div class="absolute top-8 left-8">
-        <a href="{{ url('/') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-slate-300 font-bold text-[14px] hover:text-white hover:bg-white/10 transition-all shadow-sm group">
+        <a href="<?php echo e(url('/')); ?>" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-slate-300 font-bold text-[14px] hover:text-white hover:bg-white/10 transition-all shadow-sm group">
             <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             Kembali ke Beranda
         </a>
@@ -34,19 +34,33 @@
             <p class="text-slate-400 mt-2 text-[14px]">Masuk sebagai pengelola sarana sekolah.</p>
         </div>
         
-        <form method="POST" action="{{ route('admin.login') }}" class="space-y-5">
-            @csrf
+        <form method="POST" action="<?php echo e(route('admin.login')); ?>" class="space-y-5">
+            <?php echo csrf_field(); ?>
             <div>
                 <label for="nis" class="block text-sm font-semibold text-slate-300 mb-1.5 px-1">Username</label>
-                <input id="nis" type="text" name="nis" value="{{ old('nis') }}" required autofocus
+                <input id="nis" type="text" name="nis" value="<?php echo e(old('nis')); ?>" required autofocus
                     class="block w-full rounded-2xl bg-[#0c0a09] border-slate-700 py-3.5 px-4 shadow-inner border focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-white outline-none placeholder-slate-600">
-                @error('nis') <span class="text-red-400 text-xs mt-2 px-1 block font-medium">{{ $message }}</span> @enderror
+                <?php $__errorArgs = ['nis'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-red-400 text-xs mt-2 px-1 block font-medium"><?php echo e($message); ?></span> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
             <div>
                 <label for="password" class="block text-sm font-semibold text-slate-300 mb-1.5 px-1">Password</label>
                 <input id="password" type="password" name="password" required
                     class="block w-full rounded-2xl bg-[#0c0a09] border-slate-700 py-3.5 px-4 shadow-inner border focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-white outline-none placeholder-slate-600">
-                @error('password') <span class="text-red-400 text-xs mt-2 px-1 block font-medium">{{ $message }}</span> @enderror
+                <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <span class="text-red-400 text-xs mt-2 px-1 block font-medium"><?php echo e($message); ?></span> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
             
             <div class="pt-4">
@@ -58,3 +72,4 @@
     </div>
 </body>
 </html>
+<?php /**PATH C:\laragon\www\Sarana_pengaduan_sekolah\resources\views/auth/admin-login.blade.php ENDPATH**/ ?>

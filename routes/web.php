@@ -24,12 +24,20 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Admin Routes
-    Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () { // Assuming role checking is in views or controllers
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/complaints', [AdminController::class, 'complaints'])->name('admin.complaints.index');
         Route::get('/complaints/{complaint}', [AdminController::class, 'showComplaint'])->name('admin.complaints.show');
         Route::patch('/complaints/{complaint}/status', [AdminController::class, 'updateStatus'])->name('admin.complaints.status');
         Route::post('/import/students', [AdminController::class, 'importStudents'])->name('admin.students.import');
+
+        // Manajemen Siswa (Manual)
+        Route::get('/students', [AdminController::class, 'students'])->name('admin.students.index');
+        Route::get('/students/create', [AdminController::class, 'createStudent'])->name('admin.students.create');
+        Route::post('/students', [AdminController::class, 'storeStudent'])->name('admin.students.store');
+        Route::get('/students/{student}/edit', [AdminController::class, 'editStudent'])->name('admin.students.edit');
+        Route::patch('/students/{student}', [AdminController::class, 'updateStudent'])->name('admin.students.update');
+        Route::delete('/students/{student}', [AdminController::class, 'destroyStudent'])->name('admin.students.destroy');
     });
 
     // Profile Routes (Assuming Breeze)

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="mb-8 p-8 bg-[#111111] rounded-[2rem] shadow-xl relative overflow-hidden text-white flex items-center justify-between">
@@ -28,7 +26,7 @@
                 </div>
                 <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Total Pengaduan</p>
             </div>
-            <p class="text-4xl font-extrabold text-slate-800">{{ $totalComplaints }}</p>
+            <p class="text-4xl font-extrabold text-slate-800"><?php echo e($totalComplaints); ?></p>
         </div>
 
         <!-- Pending -->
@@ -40,7 +38,7 @@
                 </div>
                 <p class="text-sm font-semibold text-amber-600 uppercase tracking-wide">Menunggu Verifikasi</p>
             </div>
-            <p class="text-4xl font-extrabold text-slate-800 relative z-10">{{ $pendingComplaints }}</p>
+            <p class="text-4xl font-extrabold text-slate-800 relative z-10"><?php echo e($pendingComplaints); ?></p>
         </div>
 
         <!-- Process -->
@@ -52,7 +50,7 @@
                 </div>
                 <p class="text-sm font-semibold text-blue-600 uppercase tracking-wide">Sedang Diproses</p>
             </div>
-            <p class="text-4xl font-extrabold text-slate-800 relative z-10">{{ $processComplaints }}</p>
+            <p class="text-4xl font-extrabold text-slate-800 relative z-10"><?php echo e($processComplaints); ?></p>
         </div>
 
         <!-- Finished -->
@@ -64,7 +62,7 @@
                 </div>
                 <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide">Selesai Ditangani</p>
             </div>
-            <p class="text-4xl font-extrabold text-slate-800 relative z-10">{{ $finishedComplaints }}</p>
+            <p class="text-4xl font-extrabold text-slate-800 relative z-10"><?php echo e($finishedComplaints); ?></p>
         </div>
     </div>
 
@@ -77,31 +75,32 @@
                         <div class="w-2 h-6 bg-blue-500 rounded-full"></div>
                         <h2 class="text-xl font-bold text-slate-800">5 Pengaduan Terbaru</h2>
                     </div>
-                    <a href="{{ route('admin.complaints.index') }}" class="text-sm font-semibold text-blue-600 hover:text-blue-800 px-4 py-2 hover:bg-blue-50 rounded-full transition-colors flex items-center gap-1">Lihat Semua <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></a>
+                    <a href="<?php echo e(route('admin.complaints.index')); ?>" class="text-sm font-semibold text-blue-600 hover:text-blue-800 px-4 py-2 hover:bg-blue-50 rounded-full transition-colors flex items-center gap-1">Lihat Semua <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <tbody class="text-slate-700 divide-y divide-slate-100">
-                            @if(count($recentComplaints) > 0)
-                                @foreach($recentComplaints as $complaint)
+                            <?php if(count($recentComplaints) > 0): ?>
+                                <?php $__currentLoopData = $recentComplaints; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $complaint): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr class="hover:bg-slate-50 transition-colors group">
                                     <td class="py-5 px-8 text-[13.5px] font-medium text-slate-400 w-32 whitespace-nowrap">
-                                        {{ $complaint->created_at->format('d M, H:i') }}
+                                        <?php echo e($complaint->created_at->format('d M, H:i')); ?>
+
                                     </td>
                                     <td class="py-5 px-4 w-full">
-                                        <p class="font-bold text-[15px] text-slate-800 tracking-tight">{{ $complaint->judul }}</p>
-                                        <p class="text-[13px] font-medium text-slate-500 mt-0.5">{{ $complaint->user->name ?? 'User Terhapus' }}</p>
+                                        <p class="font-bold text-[15px] text-slate-800 tracking-tight"><?php echo e($complaint->judul); ?></p>
+                                        <p class="text-[13px] font-medium text-slate-500 mt-0.5"><?php echo e($complaint->user->name ?? 'User Terhapus'); ?></p>
                                     </td>
                                     <td class="py-5 px-8 text-right whitespace-nowrap">
-                                        <a href="{{ route('admin.complaints.show', $complaint->id) }}" class="inline-flex items-center px-5 py-2 rounded-full text-[13px] font-bold bg-white border border-slate-200 text-slate-700 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-700 transition-all shadow-sm group-hover:shadow">Verifikasi</a>
+                                        <a href="<?php echo e(route('admin.complaints.show', $complaint->id)); ?>" class="inline-flex items-center px-5 py-2 rounded-full text-[13px] font-bold bg-white border border-slate-200 text-slate-700 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-700 transition-all shadow-sm group-hover:shadow">Verifikasi</a>
                                     </td>
                                 </tr>
-                                @endforeach
-                            @else
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php else: ?>
                             <tr>
                                 <td colspan="3" class="py-12 text-center text-slate-500 font-medium">Belum ada data pengaduan masuk.</td>
                             </tr>
-                            @endif
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -121,8 +120,8 @@
                 </div>
                 <div class="p-8">
                     <p class="text-[13.5px] font-medium text-slate-500 mb-6 leading-relaxed">Tambahkan user siswa secara massal menggunakan file Spreadsheet (CSV) agar mereka dapat login.</p>
-                    <form action="{{ route('admin.students.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                    <form action="<?php echo e(route('admin.students.import')); ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
                         <div class="mb-5">
                             <label class="block sr-only">Pilih File CSV</label>
                             <input type="file" name="file" required accept=".csv,.xlsx,.xls" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border file:border-blue-100 file:text-[13px] file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all cursor-pointer">
@@ -137,7 +136,7 @@
                 </div>
             </div>
 
-            {{-- Shortcut: Kelola Siswa --}}
+            
             <div class="mt-6 bg-white rounded-[1.5rem] shadow-sm border border-slate-100 overflow-hidden">
                 <div class="px-8 py-6 border-b border-slate-100 bg-white">
                     <div class="flex items-center gap-3">
@@ -149,11 +148,11 @@
                 </div>
                 <div class="p-8">
                     <p class="text-[13.5px] font-medium text-slate-500 mb-6 leading-relaxed">Tambah, edit, dan hapus data siswa secara manual satu per satu.</p>
-                    <a href="{{ route('admin.students.index') }}" class="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl py-3 text-[14.5px] font-bold transition-all shadow-md hover:-translate-y-0.5">
+                    <a href="<?php echo e(route('admin.students.index')); ?>" class="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl py-3 text-[14.5px] font-bold transition-all shadow-md hover:-translate-y-0.5">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         Lihat Semua Siswa
                     </a>
-                    <a href="{{ route('admin.students.create') }}" class="mt-3 flex items-center justify-center gap-2 w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl py-3 text-[14px] font-bold transition-all">
+                    <a href="<?php echo e(route('admin.students.create')); ?>" class="mt-3 flex items-center justify-center gap-2 w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl py-3 text-[14px] font-bold transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                         Tambah Siswa Baru
                     </a>
@@ -162,4 +161,6 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\Sarana_pengaduan_sekolah\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>
