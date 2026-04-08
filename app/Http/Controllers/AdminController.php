@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Complaint;
@@ -67,6 +68,16 @@ class AdminController extends Controller
         $complaint->update(['status' => $request->status]);
 
         return back()->with('success', 'Status pengaduan diperbarui.');
+    }
+
+    /**
+     * Hapus pengaduan.
+     */
+    public function destroyComplaint(Complaint $complaint)
+    {
+        $complaint->delete();
+
+        return redirect()->route('admin.complaints.index')->with('success', 'Pengaduan berhasil dihapus.');
     }
 
     /**

@@ -1,17 +1,15 @@
 <?php $__env->startSection('content'); ?>
 <div class="max-w-7xl mx-auto">
     <!-- Header -->
-    <div class="mb-8 p-8 bg-[#111111] rounded-[2rem] shadow-xl relative overflow-hidden text-white flex items-center justify-between">
-        <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute right-20 -bottom-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="mb-8 p-8 bg-[#111111] -[2rem] shadow-xl relative overflow-hidden text-white flex items-center justify-between">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-black/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute right-20 -bottom-20 w-64 h-64 bg-black/20 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10">
             <h1 class="text-3xl font-bold tracking-tight mb-2">Admin Dashboard</h1>
             <p class="text-slate-400 text-[15px]">Ringkasan seluruh laporan pengaduan fasilitas sekolah.</p>
         </div>
         <div class="relative z-10 hidden sm:block">
-            <div class="w-16 h-16 bg-slate-800 rounded-[1.25rem] flex items-center justify-center border border-slate-700 shadow-inner">
-                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
         </div>
     </div>
@@ -19,10 +17,10 @@
     <!-- Statistik Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Total -->
-        <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="bg-white shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
             <div class="flex items-center gap-4 mb-4">
                 <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-500 border border-slate-100 group-hover:bg-slate-100 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5    m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
                 </div>
                 <p class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Total Pengaduan</p>
             </div>
@@ -30,7 +28,7 @@
         </div>
 
         <!-- Pending -->
-        <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="bg-white  shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
             <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-50 rounded-full opacity-50 block"></div>
             <div class="flex items-center gap-4 mb-4 relative z-10">
                 <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500 border border-amber-100 group-hover:bg-amber-100 transition-colors">
@@ -42,7 +40,7 @@
         </div>
 
         <!-- Process -->
-        <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="bg-white r shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
             <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-blue-50 rounded-full opacity-50 block"></div>
             <div class="flex items-center gap-4 mb-4 relative z-10">
                 <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 border border-blue-100 group-hover:bg-blue-100 transition-colors">
@@ -54,7 +52,7 @@
         </div>
 
         <!-- Finished -->
-        <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div class="bg-white shadow-sm border border-slate-100 p-6 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
             <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-50 rounded-full opacity-50 block"></div>
             <div class="flex items-center gap-4 mb-4 relative z-10">
                 <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 border border-emerald-100 group-hover:bg-emerald-100 transition-colors">
@@ -69,7 +67,7 @@
     <!-- Data Table & Import -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2">
-            <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100 overflow-hidden">
+            <div class="bg-white rounded-[2 rem] shadow-sm border border-slate-100 overflow-hidden">
                 <div class="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-white">
                     <div class="flex items-center gap-3">
                         <div class="w-2 h-6 bg-blue-500 rounded-full"></div>
@@ -119,7 +117,7 @@
                     </div>
                 </div>
                 <div class="p-8">
-                    <p class="text-[13.5px] font-medium text-slate-500 mb-6 leading-relaxed">Tambahkan user siswa secara massal menggunakan file Spreadsheet (CSV) agar mereka dapat login.</p>
+                    <p class="text-[13.5px] font-medium text-slate-500 mb-6 leading-relaxed">Tambahkan siswa  menggunakan file Spreadsheet (CSV).</p>
                     <form action="<?php echo e(route('admin.students.import')); ?>" method="POST" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <div class="mb-5">

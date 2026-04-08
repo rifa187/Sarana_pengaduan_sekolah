@@ -1,0 +1,364 @@
+PANDUAN LENGKAP JAWABAN UKK - SARANA PENGADUAN SEKOLAH
+======================================================================
+Program: Sistem Informasi Pengaduan Sarana Sekolah
+Platform: Web Application dengan Laravel 11
+Tahun: 2026
+
+======================================================================
+PENGANTAR PROGRAM SAYA
+======================================================================
+
+Program yang saya buat adalah aplikasi web untuk mengelola pengaduan sarana 
+sekolah. Melalui program ini, siswa dapat melaporkan masalah sarana/prasarana 
+sekolah dengan mudah, dan admin dapat memproses laporan tersebut dengan 
+efisien. Konsepnya seperti sistem ticket support tetapi saya terapkan untuk 
+kebutuhan sekolah kami.
+
+======================================================================
+JAWABAN UNTUK SETIAP ELEMEN KOMPETENSI
+======================================================================
+
+ELEMEN 1.1
+MENERAPKAN STRUKTUR DATA DAN AKSES TERHADAP STRUKTUR DATA TERSEBUT
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Jadi, untuk program saya ini, saya membuat beberapa struktur data agar 
+informasi tersimpan dengan teratur dan mudah diakses. Berikut adalah 
+struktur data utama yang saya buat:
+
+STRUKTUR DATA UTAMA:
+
+1. STRUKTUR DATA USER (PENGGUNA)
+File: app/Models/User.php
+
+Data yang disimpan:
+• nis = Nomor Induk Siswa (untuk login)
+• name = Nama lengkap
+• email = Email pengguna
+• role = Peran (admin atau siswa)
+• password = Kata sandi (dienkripsi)
+
+Cara mengakses:
+<?php
+// Di UserController atau model apapun
+$user = Auth::user();  // Ambil data user yang login sekarang
+echo $user->name;      // Akses nama user
+if($user->role === 'admin') { // Cek apakah role admin
+    // Lakukan sesuatu
+}
+?>
+
+2. STRUKTUR DATA COMPLAINT (PENGADUAN)
+File: app/Models/Complaint.php
+
+Data yang disimpan:
+• judul = Judul pengaduan (misal: "Meja rusak")
+• kategori = Kategori (Sarana, Prasarana, Kesiswaan)
+• deskripsi = Penjelasan detail
+• bukti_file = File bukti/foto
+• status = Status pengaduan (menunggu, diproses, selesai, ditolak)
+
+Cara mengakses:
+<?php
+// Di ComplaintController atau form
+$complaint = Complaint::find(1); // Ambil pengaduan ID 1
+echo $complaint->judul;          // Lihat judulnya
+echo $complaint->status;         // Lihat status pengaduan
+
+// Mengakses user yang buat pengaduan
+echo $complaint->user->name;     // Lihat nama siswa pembuat
+?>
+
+3. STRUKTUR DATA RESPONSE (BALASAN DARI ADMIN)
+File: app/Models/Response.php
+
+Data yang disimpan:
+• complaint_id = ID pengaduan yang dibalas
+• admin_id = ID admin yang memberi balasan
+• respon = Teks balasan dari admin
+
+Cara mengakses:
+<?php
+$complaint = Complaint::find(1);
+$responses = $complaint->responses; // Ambil semua balasan
+foreach($responses as $response) {
+    echo $response->respon;         // Lihat isi balasan
+}
+?>
+
+======================================================================
+ELEMEN 1.2
+MENGGUNAKAN METODE PENGEMBANGAN PROGRAM
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Metode pengembangan adalah cara/langkah-langkah membuat program agar rapi 
+dan terorganisir. Saya menggunakan beberapa metode terbaik dalam industri.
+
+METODE YANG DIGUNAKAN:
+
+1. METODE MODEL-VIEW-CONTROLLER (MVC)
+• Model = Database dan logika data
+• View = Tampilan/interface yang dilihat user
+• Controller = Jembatan antara Model dan View
+
+Implementasi di program:
+• Model: app/Models/ – Complaint.php, User.php, Response.php
+• Views: resources/views/ – Tampilan student dan admin
+• Controllers: app/Http/Controllers/ – Mengelola logika
+
+2. METODE SERVICE LAYER (PEMISAHAN LOGIKA BISNIS)
+Fungsi: Pisahkan kode bisnis dari controller agar lebih rapi dan mudah di-maintain
+File: app/Services/
+• ComplaintService.php – Logika pengaduan
+• ResponseService.php – Logika balasan
+
+Contoh penggunaan:
+<?php
+// Di ComplaintController
+public function store(StoreComplaintRequest $request) {
+    $complaint = $this->complaintService->createComplaint(
+        $request->validated(),
+        $request->file('bukti_file')
+    );
+    return redirect()->route('complaints.show', $complaint);
+}
+?>
+
+3. METODE REPOSITORY PATTERN UNTUK DATABASE
+Model Eloquent ORM untuk komunikasi dengan database. Semua query diurus 
+oleh Model, bukan langsung di controller.
+
+======================================================================
+ELEMEN 1.3
+MENGGUNAKAN DIAGRAM PROGRAM DAN DESKRIPSI PROGRAM
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Diagram program menunjukkan alur kerja aplikasi secara visual. Deskripsi 
+program menjelaskan bagaimana program bekerja dan proses yang terjadi.
+
+DIAGRAM ALUR PENGADUAN:
+
+SISWA LOGIN
+    ↓
+BUAT PENGADUAN
+  (Isi form: Judul, Kategori, Deskripsi, Unggah Bukti)
+    ↓
+SIMPAN KE DATABASE
+  (Status: MENUNGGU)
+    ↓
+LIHAT DAFTAR PENGADUAN
+  (Bisa lihat status)
+    ↓
+ADMIN LOGIN
+    ↓
+LIHAT SEMUA PENGADUAN
+    ↓
+UPDATE STATUS
+  (MENUNGGU → DIPROSES → SELESAI/DITOLAK)
+    ↓
+BERI BALASAN
+  (Admin ketik respon)
+    ↓
+SISWA LIHAT BALASAN
+  (Selesai)
+
+DESKRIPSI PROGRAM:
+Program ini bekerja dengan cara:
+1. Ada dua jenis pengguna: Siswa dan Admin
+2. Siswa membuat pengaduan dengan data: Judul, Kategori, Deskripsi, File Bukti
+3. Pengaduan disimpan ke database dengan status "MENUNGGU"
+4. Admin melihat pengaduan dan mengubah statusnya menjadi "DIPROSES" atau "SELESAI"
+5. Admin memberikan balasan (respon) untuk setiap pengaduan
+6. Siswa dapat melihat balasan dari admin
+
+File dokumentasi:
+• Deskripsi_Program.md – Penjelasan lengkap program
+• Dokumentasi_ERD_Implementasi.md – Diagram database
+
+======================================================================
+ELEMEN 1.4
+MENERAPKAN HASIL PEMODELAN KE DALAM PENGEMBANGAN PROGRAM
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Saya membuat model (rancangan) di awal, kemudian mengimplementasikannya 
+dalam kode program yang nyata.
+
+PEMODELAN & IMPLEMENTASI:
+
+1. DATABASE MODELING (PEMODELAN DATABASE)
+File rancangan: Dokumentasi_ERD_Revisi.md
+Implementasi: database/migrations/
+
+Contoh:
+• Rancangan: "User harus punya nis, name, email, role"
+• Implementasi: database/migrations/0001_01_01_000000_create_users_table.php
+
+<?php
+Schema::create('users', function (Blueprint $table) {
+    $table->id();
+    $table->string('nis')->unique()->nullable();
+    $table->string('name');
+    $table->string('email')->unique();
+    $table->enum('role', ['admin', 'siswa']);
+    $table->string('password');
+    $table->timestamps();
+});
+?>
+
+2. BUSINESS LOGIC MODELING
+Rancangan: "Pengaduan punya status (menunggu, diproses, selesai, ditolak)"
+Implementasi: app/Models/Complaint.php + database/migrations/2026_02_09_120000_create_complaints_table.php
+
+3. ACCESS CONTROL MODELING (MODEL KONTROL AKSES)
+Rancangan: "Siswa hanya lihat pengaduan sendiri, Admin lihat semua"
+Implementasi: app/Policies/ComplaintPolicy.php
+
+<?php
+public function view(User $user, Complaint $complaint)
+{
+    // Admin bisa lihat semua, atau siswa bisa lihat milik sendiri
+    return $user->role === 'admin' || $user->id === $complaint->user_id;
+}
+?>
+
+======================================================================
+ELEMEN 1.5
+MENGEKSEKUSI SOURCE CODE
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Mengeksekusi source code berarti menjalankan program hingga berfungsi 
+di web browser.
+
+CARA MENGEKSEKUSI PROGRAM INI:
+
+LANGKAH 1: INSTALL DEPENDENSI
+$ composer install
+
+Lokasi: Folder vendor/ akan terisi dengan paket Laravel dan lainnya
+
+LANGKAH 2: SETUP DATABASE
+$ cp .env.example .env
+$ php artisan key:generate
+$ php artisan migrate
+$ php artisan db:seed
+
+Lokasi: database/migrations/ – Semua file migrasi
+
+LANGKAH 3: JALANKAN DEVELOPMENT SERVER
+Terminal 1: $ php artisan serve
+Terminal 2: $ npm run dev
+
+LANGKAH 4: AKSES DI BROWSER
+http://localhost:8000
+
+File yang dieksekusi saat program berjalan:
+• public/index.php – Entry point aplikasi
+• routes/web.php – Daftar route/URL
+• bootstrap/app.php – Inisialisasi aplikasi
+• app/Http/Controllers/ – Controller yang menangani request
+
+======================================================================
+ELEMEN 1.6
+MEMILIH TOOLS PEMROGRAMAN YANG SESUAI DENGAN KEBUTUHAN
+----------------------------------------------------------------------
+
+PENJELASAN MUDAH:
+Tools adalah perangkat/alat yang membantu membuat program. Saya memilih 
+tools yang tepat untuk kebutuhan.
+
+TOOLS YANG SAYA PILIH & ALASAN:
+
+Tool: Laravel 11
+Kegunaan: Framework PHP
+Alasan: Cepat, aman, built-in database, authentication, authorization
+
+Tool: MySQL/MariaDB
+Kegunaan: Database
+Alasan: Reliable, mudah, support relasi (foreign key)
+
+Tool: Blade
+Kegunaan: Template Engine
+Alasan: Built-in Laravel, mudah belajar
+
+Tool: Tailwind CSS
+Kegunaan: Styling
+Alasan: Responsive, modern, utility-first
+
+Tool: Vite
+Kegunaan: Build tool
+Alasan: Cepat, modern, menggantikan Webpack 5
+
+Tool: Composer
+Kegunaan: Package Manager PHP
+Alasan: Mudah install library
+
+Tool: npm
+Kegunaan: Package Manager JS
+Alasan: Untuk dependency frontend
+
+Tool: Spatie Permission
+Kegunaan: Authorization
+Alasan: Role-based access control
+
+Tool: Maatwebsite/Laravel-Excel
+Kegunaan: File Upload Excel
+Alasan: Import data siswa dari Excel mudah
+
+Tool: PHPUnit
+Kegunaan: Testing
+Alasan: Testing framework untuk quality assurance
+
+File konfigurasi tools:
+• composer.json – Daftar package PHP
+• package.json – Daftar package JavaScript
+• vite.config.js – Konfigurasi Vite
+• config/ – Konfigurasi Laravel
+
+======================================================================
+RINGKASAN SINGKAT UNTUK PRESENTASI
+======================================================================
+
+Ketika ditanya penguji, gunakan jawaban singkat ini:
+
+"Program saya adalah sistem pengaduan sarana sekolah berbasis web. Ada dua 
+pengguna: siswa dan admin. Siswa bisa membuat pengaduan dengan data judul, 
+kategori, deskripsi, dan file bukti. Data disimpan ke database dengan status 
+'menunggu'. Admin bisa melihat semua pengaduan dan mengubah statusnya menjadi 
+'diproses' atau 'selesai'. Admin juga bisa memberikan balasan untuk setiap 
+pengaduan. Teknologi yang digunakan adalah Laravel 11, MySQL, dan Blade 
+untuk interface."
+
+======================================================================
+PETUNJUK COPY KE MICROSOFT WORD
+======================================================================
+
+OPSI 1 - Copy dari File TXT Ini:
+1. Buka file ini dengan Notepad atau text editor
+2. Tekan Ctrl+A untuk select semua
+3. Tekan Ctrl+C untuk copy
+4. Buka Word, tekan Ctrl+V paste
+5. Format di Word sesuai kebutuhan (heading, bold, dll)
+
+OPSI 2 - Copy dari File HTML:
+1. Buka JAWABAN_UKK_PRESENTASI.html dengan double-click (buka di browser)
+2. Tekan Ctrl+A untuk select semua
+3. Tekan Ctrl+C untuk copy
+4. Buka Word, tekan Ctrl+V paste
+5. Formatting sudah lebih rapi
+
+OPSI 3 - Copy dari File Markdown Original:
+1. Gunakan JAWABAN_UKK_PRESENTASI.md
+2. Copy-paste isi ke Word
+3. Manual format di Word (lebih ribet tapi bisa)
+
+REKOMENDASI: Gunakan OPSI 2 (File HTML) karena formatting sudah bagus!
+
+======================================================================
+Dokumen ini dibuat untuk persiapan UKK Tahun 2026
+Sistem Pengaduan Sarana Sekolah - Rekayasa Perangkat Lunak
+======================================================================

@@ -91,13 +91,6 @@
 
         @yield('content')
     </main>
-
-    <!-- Footer -->
-    <footer class="mt-auto py-8">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200/60 pt-8">
-            <p class="text-center text-sm text-slate-400 font-medium">&copy; {{ date('Y') }} Aplikasi Pengaduan Sarana Sekolah. All rights reserved.</p>
-        </div>
-    </footer>
     
     <style>
         @keyframes fadeInUp {

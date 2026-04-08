@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->assignRole($adminRole);
 
-        // Create Student User
         $student = User::create([
             'nis' => '12345678',
             'name' => 'Siswa Demo',
@@ -41,5 +40,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         $student->assignRole($studentRole);
+
     }
 }

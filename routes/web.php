@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/complaints', [AdminController::class, 'complaints'])->name('admin.complaints.index');
         Route::get('/complaints/{complaint}', [AdminController::class, 'showComplaint'])->name('admin.complaints.show');
         Route::patch('/complaints/{complaint}/status', [AdminController::class, 'updateStatus'])->name('admin.complaints.status');
+        Route::delete('/complaints/{complaint}', [AdminController::class, 'destroyComplaint'])->name('admin.complaints.destroy');
         Route::post('/import/students', [AdminController::class, 'importStudents'])->name('admin.students.import');
 
         // Manajemen Siswa (Manual)
@@ -48,8 +49,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::get('login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store']);
-    Route::get('register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'store']);
     Route::get('admin/login', [App\Http\Controllers\Auth\AdminAuthController::class, 'create'])->name('admin.login');
     Route::post('admin/login', [App\Http\Controllers\Auth\AdminAuthController::class, 'store']);
 });

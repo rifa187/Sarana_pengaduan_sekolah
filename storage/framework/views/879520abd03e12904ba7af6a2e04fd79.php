@@ -18,7 +18,7 @@
                 
                 <div>
                     <label for="judul" class="block text-[14px] font-bold text-slate-700 mb-2 px-1">Judul Laporan <span class="text-red-500">*</span></label>
-                    <input type="text" name="judul" id="judul" required value="<?php echo e(old('judul')); ?>" placeholder="Contoh: AC Kelas XII RPL Rusak" 
+                    <input type="text" name="judul" id="judul" required value="<?php echo e(old('judul')); ?>" placeholder="" 
                            class="w-full rounded-xl bg-slate-50 border-slate-200 py-3.5 px-4 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all text-slate-800 font-medium">
                     <?php $__errorArgs = ['judul'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -51,7 +51,7 @@ unset($__errorArgs, $__bag); ?>
 
                 <div>
                     <label for="deskripsi" class="block text-[14px] font-bold text-slate-700 mb-2 px-1">Deskripsi Detail <span class="text-red-500">*</span></label>
-                    <textarea name="deskripsi" id="deskripsi" rows="5" required placeholder="Jelaskan secara rinci kerusakan atau masalah yang Anda temui..." 
+                    <textarea name="deskripsi" id="deskripsi" rows="5" required placeholder="" 
                               class="w-full rounded-xl bg-slate-50 border-slate-200 py-3.5 px-4 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all text-slate-800 font-medium leading-relaxed"><?php echo e(old('deskripsi')); ?></textarea>
                     <?php $__errorArgs = ['deskripsi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

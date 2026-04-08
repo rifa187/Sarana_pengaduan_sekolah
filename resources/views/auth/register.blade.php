@@ -26,7 +26,7 @@
 
     <div class="max-w-md w-full bg-white/70 backdrop-blur-xl rounded-[2rem] shadow-sm overflow-hidden border border-slate-100/60 p-8 sm:p-10">
         <div class="text-center mb-8">
-            <h2 class="text-[1.75rem] font-bold text-slate-800 leading-tight">Buat Akun 🚀</h2>
+            <h2 class="text-[1.75rem] font-bold text-slate-800 leading-tight">Buat Akun </h2>
             <p class="text-slate-500 mt-2 text-[14px]">Daftarkan diri Anda untuk mulai melapor.</p>
         </div>
         

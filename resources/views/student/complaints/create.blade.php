@@ -20,7 +20,7 @@
                 
                 <div>
                     <label for="judul" class="block text-[14px] font-bold text-slate-700 mb-2 px-1">Judul Laporan <span class="text-red-500">*</span></label>
-                    <input type="text" name="judul" id="judul" required value="{{ old('judul') }}" placeholder="Contoh: AC Kelas XII RPL Rusak" 
+                    <input type="text" name="judul" id="judul" required value="{{ old('judul') }}" placeholder="" 
                            class="w-full rounded-xl bg-slate-50 border-slate-200 py-3.5 px-4 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all text-slate-800 font-medium">
                     @error('judul') <p class="mt-2 px-1 text-sm font-medium text-red-500">{{ $message }}</p> @enderror
                 </div>
@@ -39,7 +39,7 @@
 
                 <div>
                     <label for="deskripsi" class="block text-[14px] font-bold text-slate-700 mb-2 px-1">Deskripsi Detail <span class="text-red-500">*</span></label>
-                    <textarea name="deskripsi" id="deskripsi" rows="5" required placeholder="Jelaskan secara rinci kerusakan atau masalah yang Anda temui..." 
+                    <textarea name="deskripsi" id="deskripsi" rows="5" required placeholder="" 
                               class="w-full rounded-xl bg-slate-50 border-slate-200 py-3.5 px-4 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all text-slate-800 font-medium leading-relaxed">{{ old('deskripsi') }}</textarea>
                     @error('deskripsi') <p class="mt-2 px-1 text-sm font-medium text-red-500">{{ $message }}</p> @enderror
                 </div>

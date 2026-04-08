@@ -26,7 +26,7 @@
 
     <div class="max-w-md w-full bg-white/70 backdrop-blur-xl rounded-[2rem] shadow-sm overflow-hidden border border-slate-100/60 p-8 sm:p-10">
         <div class="text-center mb-8">
-            <h2 class="text-[1.75rem] font-bold text-slate-800 leading-tight">Selamat Datang 👋</h2>
+            <h2 class="text-[1.75rem] font-bold text-slate-800 leading-tight">Selamat Datang </h2>
             <p class="text-slate-500 mt-2 text-[14px]">Masuk ke portal siswa untuk membuat laporan.</p>
         </div>
         
@@ -57,13 +57,7 @@
                 </button>
             </div>
 
-            @if (Route::has('register'))
-            <div class="text-center mt-6">
-                <a href="{{ route('register') }}" class="text-[13.5px] text-slate-500 hover:text-blue-600 font-semibold transition-colors">
-                    Belum punya akun? Daftar di sini
-                </a>
-            </div>
-            @endif
+            <!-- Register disabled - students must be registered by admin -->
         </form>
     </div>
 </body>
